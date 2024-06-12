@@ -1,161 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perpustakaan Lummiere</title>
-<style>
-  /* Inline Style Sheet */
-  body {
-    background-color: #ffcccc; /* Warna latar belakang */
-    font-family: Arial, sans-serif;
-  }
-  /* Internal Style Sheet */
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  /* External Style Sheet */
-  .pastel {
-    background-color: #ffcc99; /* Warna latar belakang */
-    color: #333;
-  }
-</style>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perpustakaan Lummiere</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('perpustakaan.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5); 
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .pastel {
+            background-color: #ffcc99;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
-<div class="content">
-  <h1 style="text-align: center;">Perpustakaan Lummiere</h1>
-  <!-- Halaman Perpustakaan Oxford -->
-  <section id="oxford" class="pastel">
-    <h2>Perpustakaan Oxford</h2>
-    <div>
-      <a href="https://library.ox.ac.uk/" target="_blank">
-        <img src="perpus1.jpg" alt="Perpustakaan Oxford" style="width: 200px; height: auto;">
-      </a>
-      <audio controls>
-        <source src="perpus1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <video width="320" height="240" controls>
-        <source src="perpus1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+    <header>
+        <h1>Selamat Datang di Perpustakaan Lummiere</h1>
+    </header>
+    <div class="overlay">
+        <div class="content">
+            <h2>Perpustakaan Lummiere</h2>
+            <p>Kami menyediakan berbagai macam buku dari berbagai genre. Temukan buku yang Anda cari dan jelajahi dunia pengetahuan bersama kami. Website ini dibuat untuk memenuhi tugas pada mata kuliah Pemrograman Web Praktik dengan dosen pengampu Ibu Himma Dewiyana, S.T., M.Hum.</p>
+        </div>
     </div>
-    <!-- Isi halaman Oxford -->
-  </section>
-  <!-- Halaman Perpustakaan Harvard -->
-  <section id="harvard" class="pastel">
-    <h2>Perpustakaan Harvard</h2>
-    <div>
-      <a href="https://library.harvard.edu/" target="_blank">
-        <img src="perpus2.jpeg" alt="Perpustakaan Harvard" style="width: 200px; height: auto;">
-      </a>
-      <audio controls>
-        <source src="perpus2.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <video width="320" height="240" controls>
-        <source src="perpus2.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Perpustakaan SUKA BACA</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#" id="contactUs">Contact Us</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="aboutWeb">About Web</a></li>
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-4">
+                <p id="welcome-message">Selamat Datang di Website Perpustakaan SUKA BACA</p>
+                <button id="displayInElementBtn" class="btn btn-primary">Tampilkan Pesan di Elemen</button>
+                <button id="displayInConsoleBtn" class="btn btn-secondary">Tampilkan Pesan di Konsol</button>
+                <button id="showLummiereContentBtn" class="btn btn-info">Tampilkan Perpustakaan Lummiere</button>
+            </div>
+            <div class="col-md-8">
+                <div class="table-container">
+                    <table id="booksTable" class="display table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul Buku</th>
+                                <th>Penulis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Septhian</td><td>Poppi Pertiwi</td></tr>
+                            <tr><td>2</td><td>Just A Friend To You</td><td>Ega Dyp</td></tr>
+                            <tr><td>3</td><td>Malioboro at Midnight</td><td>Skysphire</td></tr>
+                            <tr><td>4</td><td>Galaksi</td><td>Poppi Pertiwi</td></tr>
+                            <tr><td>5</td><td>Hilmy Milan</td><td>Nadia Ristivani</td></tr>
+                            <tr><td>6</td><td>Matahari</td><td>Tere Liye</td></tr>
+                            <tr><td>7</td><td>Sunshine becomes you</td><td>Ilana Tan</td></tr>
+                            <tr><td>8</td><td>00.00</td><td>Ameylia Falensia</td></tr>
+                            <tr><td>9</td><td>01.00</td><td>Ameylia Falensia</td></tr>
+                            <tr><td>10</td><td>Laskar Pelangi</td><td>Andrea Hirata</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- Isi halaman Harvard -->
-  </section>
-  <!-- Halaman Perpustakaan Stanford -->
-  <section id="stanford" class="pastel">
-    <h2>Perpustakaan Stanford</h2>
-    <div>
-      <a href="https://library.stanford.edu/" target="_blank">
-        <img src="perpus3.jpeg" alt="Perpustakaan Stanford" style="width: 200px; height: auto;">
-      </a>
-      <audio controls>
-        <source src="perpus3.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <video width="320" height="240" controls>
-        <source src="perpus3.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <!-- Isi halaman Stanford -->
-  </section>
-  <!-- Halaman Utama -->
-  <section id="home" class="pastel">
-    <div class="col-4">
-      <h3>Tabel Bahan Buku</h3>
-      <table class="table table-bordered">
-        <tr>
-          <td>Judul buku:</td>
-          <td>The Architecture of Love</td>
-        </tr>
-        <tr>
-          <td>Penulis:</td>
-          <td>Ika Natassa</td>
-        </tr>
-        <tr>
-          <td>Tahun Terbit:</td>
-          <td>2016</td>
-        </tr>
-        <tr>
-          <td>Penerbit:</td>
-          <td>Gramedia</td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-4">
-      <h3>Form Pemesanan Buku</h3>
-      <form>
-        <label for="nama">Nama:</label><br>
-        <input type="text" id="nama" name="nama"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="alamat">Alamat:</label><br>
-        <textarea id="alamat" name="alamat"></textarea><br>
-        <label for="judul">Judul:</label><br>
-        <input type="text" id="judul" name="judul"><br>
-        <label for="penulis">Penulis:</label><br>
-        <input type="text" id="penulis" name="penulis"><br>
-        <label for="jumlah">Jumlah:</label><br>
-        <input type="number" id="jumlah" name="jumlah"><br><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div class="col-4">
-      <h3>Form Perpanjangan Peminjaman Buku</h3>
-      <form>
-        <label for="judul-buku">Judul Buku:</label><br>
-        <input type="text" id="judul-buku" name="judul-buku"><br>
-        <label for="penulis-buku">Penulis:</label><br>
-        <input type="text" id="penulis-buku" name="penulis-buku"><br><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </section>
-  <!-- Halaman Penjelasan HTML dan CSS -->
-  <section id="about" class="pastel">
-    <h2>Tentang HTML dan CSS</h2>
-    <p>HyperText Markup Language (HTML) adalah bahasa markup yang digunakan untuk membuat struktur dan konten halaman web. HTML terdiri dari seragam tag atau elemen yang digunakan untuk menandai bagian dari halaman web, seperti heading, paragraph, image, dan hyperlink. Masing-masing tag memiliki fungsi yang berbeda dan memungkinkan browser untuk menyelesaikan konten dengan benar. Sebagai contoh, digunakan untuk menandai heading utama dari halaman dan tag untuk menandai paragraf teks. HTML juga mendukung atribut, yang dapat digunakan di dalam tag dan menyediakan informasi tambahan tentang elemen, seperti atribut src pada tag img untuk menunjukkan lokasi file gambar. Dengan HTML, pengembang dapat membuat struktur halaman web yang dapat dibaca dan diproses oleh browser. Cascading Style Sheets atau CSS adalah bahasa gaya yang digunakan untuk mengatur tampilan dan tata letak dari elemen-elemen yang telah ditandai oleh HTML. CSS memungkinkan pengembang web untuk mengontrol warna, font, ukuran, margin, padding, dan banyak properti lain dari elemen HTML mereka. CSS memungkinkan pengembang membuat desain HTML yang konsisten dan menarik. Sebagai contoh, pengembang dapat menggunakan CSS untuk memberi warna latar belakang, jenis huruf, dan efek animasi pada teks. Selain itu, CSS mendukung konsep pemisahan tampilan dari struktur, yang memungkinkan pengembang untuk mengubah penampilan situs secara terpusat tanpa mengubah struktur HTML dasarnya.</p>
-  </section>
-</div>
-<script>
-  // JavaScript untuk dropdown menu
-  document.addEventListener("DOMContentLoaded", function(event) {
-    var dropdown = document.getElementsByClassName("dropdown");
-    var i;
-    for (i = 0; i < dropdown.length; i++) {
-      dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.children[1];
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } else {
-          dropdownContent.style.display = "block";
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
         }
-      });
-    }
-  });
-</script>
+        .container {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculator</h2>
+        <form id="calculatorForm">
+            <div class="form-group">
+                <label for="num1">Number 1:</label>
+                <input type="number" class="form-control" id="num1">
+            </div>
+            <div class="form-group">
+                <label for="num2">Number 2:</label>
+                <input type="number" class="form-control" id="num2">
+            </div>
+            <div class="form-group">
+                <label for="operator">Operator:</label>
+                <select class="form-control" id="operator">
+                    <option value="add">Add</option>
+                    <option value="subtract">Subtract</option>
+                    <option value="multiply">Multiply</option>
+                    <option value="divide">Divide</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="calculateBtn">Calculate</button>
+        </form>
+        <div id="calcResult"></div>
+    </div>
+
+    <div class="footer">
+        Mata Kuliah Pengembangan Web Perpustakaan - Venesha Hutauruk - 210709075
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#calculateBtn").click(function(e) {
+                e.preventDefault();
+                const num1 = parseFloat($("#num1").val());
+                const num2 = parseFloat($("#num2").val());
+                const operator = $("#operator").val();
+                let result;
+                if (operator === "add") {
+                    result = num1 + num2;
+                } else if (operator === "subtract") {
+                    result = num1 - num2;
+                } else if (operator === "multiply") {
+                    result = num1 * num2;
+                } else if (operator === "divide") {
+                    result = num1 / num2;
+                }
+                $("#calcResult").text("Result: " + result);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PHP Days</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>PHP Days</h2>
+        <button id="generateDaysBtn" class="btn btn-primary">Generate Days of Learning PHP</button>
+        <div id="daysOutput"></div>
+    </div>
+
+    <div class="footer">
+        Mata Kuliah Pengembangan Web Perpustakaan - Venesha Hutauruk - 210709075
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#generateDaysBtn").click(function() {
+                let daysOutput = "";
+                for (let i = 1; i <= 1000; i++) {
+                    daysOutput += i + ". Ini adalah hari ke-" + i + " belajar PHP<br>";
+                }
+                $("#daysOutput").html(daysOutput);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
+        </form>
+        <div id="loginMessage"></div>
+    </div>
+
+    <div class="footer">
+        Mata Kuliah Pengembangan Web Perpustakaan - Venesha Hutauruk - 210709075
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#loginBtn").click(function(e) {
+                e.preventDefault();
+                const username = $("#username").val();
+                const password = $("#password").val();
+                if (username === "" || password === "") {
+                    $("#loginMessage").text("Input tidak lengkap");
+                } else if (username === "admin" && password === "admin") {
+                    $("#loginMessage").text("Login sukses");
+                } else {
+                    $("#loginMessage").text("Login gagal");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anggota Perpustakaan</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .control {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        let database = [
+            { id: 1, name: "Emma Watson", age: 21, email: "emmawatson@gmail.com" },
+            { id: 2, name: "Lee Ji Eun", age: 22, email: "lijieun@gmail.com" },
+            { id: 3, name: "Kim So Hyun", age: 23, email: "kimsohyun@gmail.com" },
+        ];
+
+        function displayDatabase() {
+            let table = document.getElementById("databaseTable");
+            table.innerHTML = "";
+            database.forEach((row, index) => {
+                let tr = table.insertRow();
+                tr.insertCell(0).innerHTML = row.id;
+                tr.insertCell(1).innerHTML = row.name;
+                tr.insertCell(2).innerHTML = row.age;
+                tr.insertCell(3).innerHTML = row.email;
+                let actions = tr.insertCell(4);
+                actions.innerHTML = `<button onclick="editRow(${index})">Edit</button>
+                                     <button onclick="deleteRow(${index})">Delete</button>`;
+            });
+        }
+
+        function addRow() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let email = document.getElementById("email").value;
+            let id = database.length ? database[database.length - 1].id + 1 : 1;
+            database.push({ id, name, age, email });
+            displayDatabase();
+        }
+
+        function editRow(index) {
+            let row = database[index];
+            document.getElementById("name").value = row.name;
+            document.getElementById("age").value = row.age;
+            document.getElementById("email").value = row.email;
+            document.getElementById("index").value = index;
+            document.getElementById("submit").value = "Update";
+        }
+
+        function updateRow(index) {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let email = document.getElementById("email").value;
+            database[index] = { ...database[index], name, age, email };
+            displayDatabase();
+            document.getElementById("submit").value = "Add";
+        }
+
+        function deleteRow(index) {
+            database.splice(index, 1);
+            displayDatabase();
+        }
+
+        function handleSubmit() {
+            let index = document.getElementById("index").value;
+            if (index) {
+                updateRow(index);
+            } else {
+                addRow();
+            }
+            document.getElementById("index").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("email").value = "";
+        }
+
+        window.onload = function() {
+            displayDatabase();
+        };
+    </script>
+</head>
+<body>
+    <h2>Anggota Perpustakaan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Usia</th>
+                <th>Email</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="databaseTable">
+            <!-- Data akan diisi oleh JavaScript -->
+        </tbody>
+    </table>
+
+    <div class="control">
+        <h3>Tambah/Ubah Data</h3>
+        <form onsubmit="event.preventDefault(); handleSubmit();">
+            <input type="hidden" id="index">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="age">Usia:</label>
+            <input type="number" id="age" name="age" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <input type="submit" id="submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
+
+
+    <div id="lummiere-content" class="content" style="display:none;">
+        <h1 style="text-align: center;">Perpustakaan Lummiere</h1>
+        <section id="oxford" class="pastel">
+            <h2>Perpustakaan Oxford</h2>
+            <div>
+                <a href="https://www.bodleian.ox.ac.uk/" target="_blank">
+                    <img src="perpus1.jpg" alt="Perpustakaan Oxford" style="width: 400px; height: auto;">
+                </a>
+                <audio controls>
+                    <source src="perpus1.mp3" type="audio/mpeg">
+                </audio>
+                <video width="370" height="270" controls>
+                    <source src="perpus1.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+        <section id="harvard" class="pastel">
+            <h2>Perpustakaan Harvard</h2>
+            <div>
+                <a href="https://library.harvard.edu/" target="_blank">
+                    <img src="perpus2.jpeg" alt="Perpustakaan Harvard" style="width: 380px; height: auto;">
+                </a>
+                <audio controls>
+                    <source src="perpus2.mp3" type="audio/mpeg">
+                </audio>
+                <video width="370" height="270" controls>
+                    <source src="perpus2.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+        <section id="stanford" class="pastel">
+            <h2>Perpustakaan Stanford</h2>
+            <div>
+                <a href="https://library.stanford.edu/" target="_blank">
+                    <img src="perpus3.jpeg" alt="Perpustakaan Stanford" style="width: 400px; height: auto;">
+                </a>
+                <audio controls>
+                    <source src="perpus3.mp3" type="audio/mpeg">
+                </audio>
+                <video width="370" height="270" controls>
+                    <source src="perpus3.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>&copy; 2024 veneshaht@gmail.com</div>
+        <div>Nama: 
+            <a href="#" class="text-white">Venesha Hutauruk</a> | 
+            <a href="#" class="text-white">210709075</a> | 
+            <a href="#" class="text-white">Thank You</a>
+        </div>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#booksTable').DataTable();
+
+            $('#displayInElementBtn').click(function() {
+                $('#welcome-message').text('Pesan ini ditampilkan di elemen HTML.');
+            });
+
+            $('#displayInConsoleBtn').click(function() {
+                console.log('Pesan ini ditampilkan di konsol browser.');
+            });
+
+            $('#showLummiereContentBtn').click(function() {
+                $('#lummiere-content').toggle();
+            });
+        });
+    </script>
 </body>
 </html>
